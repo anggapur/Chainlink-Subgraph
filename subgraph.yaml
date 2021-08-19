@@ -1,0 +1,74 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: AccessControlledOffchainAggregator
+    network: mumbai
+    source:
+      address: "0x01a1f73b1f4726eb6eb189ffa5cbb91af8e14025"
+      abi: AccessControlledOffchainAggregator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - AddedAccess
+        - AnswerUpdated
+        - BillingAccessControllerSet
+        - BillingSet
+        - CheckAccessDisabled
+        - CheckAccessEnabled
+        - ConfigSet
+        - NewRound
+        - NewTransmission
+        - OraclePaid
+        - OwnershipTransferRequested
+        - OwnershipTransferred
+        - PayeeshipTransferRequested
+        - PayeeshipTransferred
+        - RemovedAccess
+        - RequesterAccessControllerSet
+        - RoundRequested
+        - ValidatorUpdated
+      abis:
+        - name: AccessControlledOffchainAggregator
+          file: ./abis/AccessControlledOffchainAggregator.json
+      eventHandlers:
+        - event: AddedAccess(address)
+          handler: handleAddedAccess
+        - event: AnswerUpdated(indexed int256,indexed uint256,uint256)
+          handler: handleAnswerUpdated
+        - event: BillingAccessControllerSet(address,address)
+          handler: handleBillingAccessControllerSet
+        - event: BillingSet(uint32,uint32,uint32,uint32,uint32)
+          handler: handleBillingSet
+        - event: CheckAccessDisabled()
+          handler: handleCheckAccessDisabled
+        - event: CheckAccessEnabled()
+          handler: handleCheckAccessEnabled
+        - event: ConfigSet(uint32,uint64,address[],address[],uint8,uint64,bytes)
+          handler: handleConfigSet
+        - event: NewRound(indexed uint256,indexed address,uint256)
+          handler: handleNewRound
+        - event: NewTransmission(indexed uint32,int192,address,int192[],bytes,bytes32)
+          handler: handleNewTransmission
+        - event: OraclePaid(address,address,uint256)
+          handler: handleOraclePaid
+        - event: OwnershipTransferRequested(indexed address,indexed address)
+          handler: handleOwnershipTransferRequested
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PayeeshipTransferRequested(indexed address,indexed address,indexed address)
+          handler: handlePayeeshipTransferRequested
+        - event: PayeeshipTransferred(indexed address,indexed address,indexed address)
+          handler: handlePayeeshipTransferred
+        - event: RemovedAccess(address)
+          handler: handleRemovedAccess
+        - event: RequesterAccessControllerSet(address,address)
+          handler: handleRequesterAccessControllerSet
+        - event: RoundRequested(indexed address,bytes16,uint32,uint8)
+          handler: handleRoundRequested
+        - event: ValidatorUpdated(indexed address,indexed address)
+          handler: handleValidatorUpdated
+      file: ./src/mapping.ts
