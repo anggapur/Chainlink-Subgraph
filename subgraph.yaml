@@ -1,74 +1,91 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 schema:
   file: ./schema.graphql
 dataSources:
+  # DAI to USD
   - kind: ethereum/contract
-    name: AccessControlledOffchainAggregator
+    name: AccessControlledAggregatorDAItoUSD
     network: mumbai
     source:
-      address: "0x01a1f73b1f4726eb6eb189ffa5cbb91af8e14025"
-      abi: AccessControlledOffchainAggregator
+      startBlock: 3782887
+      address: "0x5498BB86BC934c8D34FDA08E81D444153d0D06aD"
+      abi: AccessControlledAggregator
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.2
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
-      entities:
-        - AddedAccess
-        - AnswerUpdated
-        - BillingAccessControllerSet
-        - BillingSet
-        - CheckAccessDisabled
-        - CheckAccessEnabled
-        - ConfigSet
+      entities:       
+        # For Initial Creation of Feed Entity   
+        - RoundDetailsUpdated
         - NewRound
-        - NewTransmission
-        - OraclePaid
-        - OwnershipTransferRequested
-        - OwnershipTransferred
-        - PayeeshipTransferRequested
-        - PayeeshipTransferred
-        - RemovedAccess
-        - RequesterAccessControllerSet
-        - RoundRequested
-        - ValidatorUpdated
+        - AnswerUpdated
       abis:
-        - name: AccessControlledOffchainAggregator
-          file: ./abis/AccessControlledOffchainAggregator.json
-      eventHandlers:
-        - event: AddedAccess(address)
-          handler: handleAddedAccess
+        - name: AccessControlledAggregator
+          file: ./abis/AccessControlledAggregator.json
+      eventHandlers:       
+        # For Initial Creation of Feed Entity                
+        - event: RoundDetailsUpdated(indexed uint128,indexed uint32,indexed uint32,uint32,uint32)
+          handler: handleRoundDetailsUpdated
+        - event: NewRound(indexed uint256,indexed address,uint256)
+          handler: handlerNewRound
         - event: AnswerUpdated(indexed int256,indexed uint256,uint256)
           handler: handleAnswerUpdated
-        - event: BillingAccessControllerSet(address,address)
-          handler: handleBillingAccessControllerSet
-        - event: BillingSet(uint32,uint32,uint32,uint32,uint32)
-          handler: handleBillingSet
-        - event: CheckAccessDisabled()
-          handler: handleCheckAccessDisabled
-        - event: CheckAccessEnabled()
-          handler: handleCheckAccessEnabled
-        - event: ConfigSet(uint32,uint64,address[],address[],uint8,uint64,bytes)
-          handler: handleConfigSet
+      file: ./src/handler.ts
+  # USDC to USD
+  - kind: ethereum/contract
+    name: AccessControlledAggregatorUSDCtoUSD
+    network: mumbai
+    source:
+      startBlock: 3782886
+      address: "0xFadfF79bA04F169386646a43869B66B39c7E0858"
+      abi: AccessControlledAggregator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:       
+        # For Initial Creation of Feed Entity   
+        - RoundDetailsUpdated
+        - NewRound
+        - AnswerUpdated
+      abis:
+        - name: AccessControlledAggregator
+          file: ./abis/AccessControlledAggregator.json
+      eventHandlers:       
+        # For Initial Creation of Feed Entity                
+        - event: RoundDetailsUpdated(indexed uint128,indexed uint32,indexed uint32,uint32,uint32)
+          handler: handleRoundDetailsUpdated
         - event: NewRound(indexed uint256,indexed address,uint256)
-          handler: handleNewRound
-        - event: NewTransmission(indexed uint32,int192,address,int192[],bytes,bytes32)
-          handler: handleNewTransmission
-        - event: OraclePaid(address,address,uint256)
-          handler: handleOraclePaid
-        - event: OwnershipTransferRequested(indexed address,indexed address)
-          handler: handleOwnershipTransferRequested
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: PayeeshipTransferRequested(indexed address,indexed address,indexed address)
-          handler: handlePayeeshipTransferRequested
-        - event: PayeeshipTransferred(indexed address,indexed address,indexed address)
-          handler: handlePayeeshipTransferred
-        - event: RemovedAccess(address)
-          handler: handleRemovedAccess
-        - event: RequesterAccessControllerSet(address,address)
-          handler: handleRequesterAccessControllerSet
-        - event: RoundRequested(indexed address,bytes16,uint32,uint8)
-          handler: handleRoundRequested
-        - event: ValidatorUpdated(indexed address,indexed address)
-          handler: handleValidatorUpdated
-      file: ./src/mapping.ts
+          handler: handlerNewRound
+        - event: AnswerUpdated(indexed int256,indexed uint256,uint256)
+          handler: handleAnswerUpdated
+      file: ./src/handler.ts
+  # USDT to USD
+  - kind: ethereum/contract
+    name: AccessControlledAggregatorUSDTtoUSD
+    network: mumbai
+    source:
+      startBlock: 3782884
+      address: "0x84b9B910527Ad5C03A9Ca831909E21e236EA7b06"
+      abi: AccessControlledAggregator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:       
+        # For Initial Creation of Feed Entity   
+        - RoundDetailsUpdated
+        - NewRound
+        - AnswerUpdated
+      abis:
+        - name: AccessControlledAggregator
+          file: ./abis/AccessControlledAggregator.json
+      eventHandlers:       
+        # For Initial Creation of Feed Entity                
+        - event: RoundDetailsUpdated(indexed uint128,indexed uint32,indexed uint32,uint32,uint32)
+          handler: handleRoundDetailsUpdated
+        - event: NewRound(indexed uint256,indexed address,uint256)
+          handler: handlerNewRound
+        - event: AnswerUpdated(indexed int256,indexed uint256,uint256)
+          handler: handleAnswerUpdated
+      file: ./src/handler.ts

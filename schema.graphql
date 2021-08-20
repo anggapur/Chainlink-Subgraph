@@ -1,5 +1,15 @@
-type ExampleEntity @entity {
+type Feed @entity {
   id: ID!
-  count: BigInt!
-  user: Bytes! # address
+  contractAddress: String!
+  rounds: [Round!] @derivedFrom(field: "feed")
+  name: String!  
+  version: Int!
+}
+
+type Round @entity {
+  id: ID!
+  number: BigInt!
+  feed: Feed!
+  unixTimestamp: Int!
+  value: BigInt
 }
