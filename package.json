@@ -10,8 +10,13 @@
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ChainlinkMumbai"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.21.1",
-    "@graphprotocol/graph-ts": "0.20.0"
+    "@graphprotocol/graph-cli": "0.18.0",
+    "@graphprotocol/graph-ts": "0.18.1",
+    "@assemblyscript/loader": "^0.19.4"
+  },
+  "devDependencies": {
+    "@assemblyscript/loader": "^0.19.4",
+    "assemblyscript": "^0.19.4"
   },
   "version": "0.0.0"
 }
