@@ -1,15 +1,14 @@
-import { BigInt } from "@graphprotocol/graph-ts"
-import { RoundDetailsUpdated, NewRound, AnswerUpdated } from '../generated/AccessControlledAggregator/AccessControlledAggregator';
+import { RequesterAccessControllerSet, NewRound, AnswerUpdated } from '../generated/AccessControlledOffchainAggregatorDAItoUSD/AccessControlledOffchainAggregator';
 import { Feed, Round } from "../generated/schema"
 
-import { AccessControlledAggregator } from '../generated/AccessControlledAggregator/AccessControlledAggregator';
+import { AccessControlledOffchainAggregator } from '../generated/AccessControlledOffchainAggregatorDAItoUSD/AccessControlledOffchainAggregator';
 
 
-export function handleRoundDetailsUpdated(
-    event: RoundDetailsUpdated
+export function handleRequesterAccessControllerSet(
+    event: RequesterAccessControllerSet
   ): void {
 
-    let contract = AccessControlledAggregator.bind(event.address)    
+    let contract = AccessControlledOffchainAggregator.bind(event.address)    
 
     let newFeed = new Feed(event.address.toHex())
     newFeed.contractAddress = event.address.toHex();    

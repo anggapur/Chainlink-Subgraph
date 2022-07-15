@@ -4,28 +4,28 @@ schema:
 dataSources:
   # DAI to USD
   - kind: ethereum/contract
-    name: AccessControlledAggregatorDAItoUSD
-    network: mumbai
+    name: AccessControlledOffchainAggregatorDAItoUSD
+    network: matic
     source:
-      startBlock: 3782887
-      address: "0x5498BB86BC934c8D34FDA08E81D444153d0D06aD"
-      abi: AccessControlledAggregator
+      startBlock: 16610793
+      address: "0x62439095489Eb5dE4572de632248682c09a05Ad4"
+      abi: AccessControlledOffchainAggregator
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:       
         # For Initial Creation of Feed Entity   
-        - RoundDetailsUpdated
+        - RequesterAccessControllerSet
         - NewRound
         - AnswerUpdated
       abis:
-        - name: AccessControlledAggregator
-          file: ./abis/AccessControlledAggregator.json
+        - name: AccessControlledOffchainAggregator
+          file: ./abis/AccessControlledOffchainAggregator.json
       eventHandlers:       
         # For Initial Creation of Feed Entity                
-        - event: RoundDetailsUpdated(indexed uint128,indexed uint32,indexed uint32,uint32,uint32)
-          handler: handleRoundDetailsUpdated
+        - event: RequesterAccessControllerSet(address,address)
+          handler: handleRequesterAccessControllerSet
         - event: NewRound(indexed uint256,indexed address,uint256)
           handler: handlerNewRound
         - event: AnswerUpdated(indexed int256,indexed uint256,uint256)
@@ -33,28 +33,28 @@ dataSources:
       file: ./src/handler.ts
   # USDC to USD
   - kind: ethereum/contract
-    name: AccessControlledAggregatorUSDCtoUSD
-    network: mumbai
+    name: AccessControlledOffchainAggregatorUSDCtoUSD
+    network: matic
     source:
-      startBlock: 3782886
-      address: "0xFadfF79bA04F169386646a43869B66B39c7E0858"
-      abi: AccessControlledAggregator
+      startBlock: 16611001
+      address: "0xf9c53A834F60cBbE40E27702276fBc0819B3aFAD"
+      abi: AccessControlledOffchainAggregator
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:       
         # For Initial Creation of Feed Entity   
-        - RoundDetailsUpdated
+        - RequesterAccessControllerSet
         - NewRound
         - AnswerUpdated
       abis:
-        - name: AccessControlledAggregator
-          file: ./abis/AccessControlledAggregator.json
+        - name: AccessControlledOffchainAggregator
+          file: ./abis/AccessControlledOffchainAggregator.json
       eventHandlers:       
         # For Initial Creation of Feed Entity                
-        - event: RoundDetailsUpdated(indexed uint128,indexed uint32,indexed uint32,uint32,uint32)
-          handler: handleRoundDetailsUpdated
+        - event: RequesterAccessControllerSet(address,address)
+          handler: handleRequesterAccessControllerSet
         - event: NewRound(indexed uint256,indexed address,uint256)
           handler: handlerNewRound
         - event: AnswerUpdated(indexed int256,indexed uint256,uint256)
@@ -62,28 +62,28 @@ dataSources:
       file: ./src/handler.ts
   # USDT to USD
   - kind: ethereum/contract
-    name: AccessControlledAggregatorUSDTtoUSD
-    network: mumbai
+    name: AccessControlledOffchainAggregatorUSDTtoUSD
+    network: matic
     source:
-      startBlock: 3782884
-      address: "0x84b9B910527Ad5C03A9Ca831909E21e236EA7b06"
-      abi: AccessControlledAggregator
+      startBlock: 16610301
+      address: "0x3011E9D73E9b01A593dA032F41626E6bbE9e408D"
+      abi: AccessControlledOffchainAggregator
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:       
         # For Initial Creation of Feed Entity   
-        - RoundDetailsUpdated
+        - RequesterAccessControllerSet
         - NewRound
         - AnswerUpdated
       abis:
-        - name: AccessControlledAggregator
-          file: ./abis/AccessControlledAggregator.json
+        - name: AccessControlledOffchainAggregator
+          file: ./abis/AccessControlledOffchainAggregator.json
       eventHandlers:       
         # For Initial Creation of Feed Entity                
-        - event: RoundDetailsUpdated(indexed uint128,indexed uint32,indexed uint32,uint32,uint32)
-          handler: handleRoundDetailsUpdated
+        - event: RequesterAccessControllerSet(address,address)
+          handler: handleRequesterAccessControllerSet
         - event: NewRound(indexed uint256,indexed address,uint256)
           handler: handlerNewRound
         - event: AnswerUpdated(indexed int256,indexed uint256,uint256)
